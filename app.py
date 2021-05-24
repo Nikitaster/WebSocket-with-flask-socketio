@@ -22,19 +22,23 @@ def handle_message(message):
 
         data = json.loads(message)
         text = data['text'].lower().replace(',', ' ').replace('.', ' ').replace('!', ' ').replace('?', ' ').replace('\n', ' ').split()
+        is_command = False
         for word in text:
             if word in ['привет', 'hi', 'hello']: 
                 response = {'text': 'Привет! {}'.format(chr(128526)), 'time': int(time.time())}
                 logging.info('message has been sent: {}'.format(response))
                 emit('response', json.dumps(response))
+                is_command = True
             elif word in ['инфо', 'info']:
                 response = {'text': 'Это учебный бот. Написан на flask-socketio.\nАвтор: Гудков Никита', 'time': int(time.time())}
                 logging.info('message has been sent: {}'.format(response))
                 emit('response', json.dumps(response))
-            else:
-                response = {'text': 'Мне нечего ответить', 'time': int(time.time())}
-                logging.info('message has been sent: {}'.format(response))
-                emit('response', json.dumps(response))
+                is_command = True
+                
+        if not is_command:
+            response = {'text': 'Мне нечего ответить', 'time': int(time.time())}
+            logging.info('message has been sent: {}'.format(response))
+            emit('response', json.dumps(response))
         
     except Exception as e:
         logging.error('{}'.format(e.args))
