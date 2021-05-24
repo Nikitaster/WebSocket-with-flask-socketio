@@ -21,7 +21,7 @@ def handle_message(message):
         logging.info('message has been received: {}'.format(message))
 
         data = json.loads(message)
-        text = data['text'].lower().replace(',', ' ').replace('.', ' ').replace('!', ' ').replace('?', ' ').split()
+        text = data['text'].lower().replace(',', ' ').replace('.', ' ').replace('!', ' ').replace('?', ' ').replace('\n', ' ').split()
         for word in text:
             if word in ['привет', 'hi', 'hello']: 
                 response = {'text': 'Привет! {}'.format(chr(128526)), 'time': int(time.time())}
