@@ -36,3 +36,20 @@ server {
 }
 ```
 
+### Systemd UNIT
+/etc/systemd/system/socket-io.service
+```bash
+[Unit]
+Description=gunicorn websocket.io daemon
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/home/ubuntu/websocket-with-flask-socketio
+Restart=always
+ExecStart=/bin/bash gunicorn-run.sh
+
+[Install]
+WantedBy=multi-user.target
+```
+
