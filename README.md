@@ -1,19 +1,26 @@
 ## Chatbot powered by Flask-SocketIO
 
 ### Installation
-    clone this project
+```bash
+clone this project
 
-    python3 -m venv venv
+python3 -m venv venv
 
-    source venv/bin/activate
+source venv/bin/activate
 
-    pip3 install --upgrade pip
-    pip3 install -r requirements.txt
-
+pip3 install --upgrade pip
+pip3 install -r requirements.txt
+```
 
 ### Run 
-    ./gunicorn-run.sh
-
+```bash
+./gunicorn-run.sh
+```
+or manually
+```bash
+source venv/bin/activate
+gunicorn -k geventwebsocket.gunicorn.workers.GeventWebSocketWorker -w 10 app:app --bind 0.0.0.0:8000
+```
 
 ### Configuration for Nginx
 Listening 8000 port.
