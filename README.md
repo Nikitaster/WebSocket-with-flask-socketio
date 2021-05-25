@@ -37,6 +37,7 @@ server {
 ```
 
 ### Systemd UNIT
+##### Create unit file
 /etc/systemd/system/socket-io.service
 ```bash
 [Unit]
@@ -51,5 +52,10 @@ ExecStart=/bin/bash gunicorn-run.sh
 
 [Install]
 WantedBy=multi-user.target
+```
+##### Run and enable
+```bash
+systemctl start socket-io.service
+systemctl enable socket-io.service
 ```
 
